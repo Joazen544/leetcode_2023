@@ -1,39 +1,58 @@
+/*
+這裡最新的解法，是目前表現最好的
+*/
+
 var groupAnagrams = function (strs) {
-  let outPutArray = [];
-  let counted = [];
-  let sortedArray = [];
+  let outPutObject = {};
+
   for (z = 0; z < strs.length; z++) {
-    sortedArray[z] = strs[z].split("").sort();
-  }
-
-  for (i = 0; i < strs.length; i++) {
-    if (counted[strs[i]] !== 1) {
-      let arraySet = [];
-      arraySet.push(strs[i]);
-      counted[strs[i]] = 1;
-      //const firstWordSorted = strs[i].split("").sort();
-
-      for (j = i + 1; j < strs.length; j++) {
-        // if (counted[strs[j]] === 1) {
-        //   continue;
-        // }
-        //const compareWordSorted = strs[j].split("").sort();
-        if (sortedArray[i].toString() === sortedArray[j].toString()) {
-          //代表是一樣的
-          arraySet.push(strs[j]);
-          counted[strs[j]] = 1;
-        }
-      }
-
-      outPutArray.push(arraySet);
+    let string = strs[z].split("").sort().join("");
+    if (outPutObject[string]) {
+      outPutObject[string].push(strs[z]);
+    } else {
+      outPutObject[string] = [strs[z]];
     }
   }
 
-  return outPutArray;
+  return Object.values(outPutObject);
 };
-
 let strs = ["sow", "map", "pam", "nat"];
 console.log(groupAnagrams(strs));
+
+/*
+這裡是第二個想到的答案，速度似乎更慢
+*/
+
+// var groupAnagrams = function (strs) {
+//   let outPutArray = [];
+//   let counted = [];
+//   let sortedArray = [];
+//   for (z = 0; z < strs.length; z++) {
+//     sortedArray[z] = strs[z].split("").sort();
+//   }
+
+//   for (i = 0; i < strs.length; i++) {
+//     if (counted[strs[i]] !== 1) {
+//       let arraySet = [];
+//       arraySet.push(strs[i]);
+//       counted[strs[i]] = 1;
+//       //const firstWordSorted = strs[i].split("").sort();
+
+//       for (j = i + 1; j < strs.length; j++) {
+
+//         if (sortedArray[i].toString() === sortedArray[j].toString()) {
+//           //代表是一樣的
+//           arraySet.push(strs[j]);
+//           counted[strs[j]] = 1;
+//         }
+//       }
+
+//       outPutArray.push(arraySet);
+//     }
+//   }
+
+//   return outPutArray;
+// };
 
 /*
 下面是第一個想到的解法
