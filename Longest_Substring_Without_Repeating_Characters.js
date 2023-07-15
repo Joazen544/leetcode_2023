@@ -10,7 +10,7 @@ var lengthOfLongestSubstring = function (s) {
   let numExistMap = new Map();
   let longestString = 0;
   let nowStringLong = 0;
-  let nowStart = 0;
+
   for (let i = 0; i < sArray.length; i++) {
     if (numExistMap.has(sArray[i]) == false) {
       numExistMap.set(sArray[i], i);
